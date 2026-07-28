@@ -7,6 +7,7 @@ package com.projeto.tcc_backend.repository;
 import com.projeto.tcc_backend.model.UsuarioBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +36,32 @@ public class UsuarioDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public UsuarioBean login(String nome, String email, String senha) {
+        UsuarioBean usuarios = new UsuarioBean();
+        ResultSet rs = null;
+        
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE nome = ? AND email = ? AND senha = ?");
+            
+            stmt.setString(1, nome);
+            stmt.setString(2, email);
+            stmt.setString(3, senha);
+            
+            rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                usuarios.setNome(rs.getString("nome"));
+                usuarios.setEmail(rs.getString("email"));
+                usuarios.setSenha(rs.getString("senha"));
+            }
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
     }
 }
