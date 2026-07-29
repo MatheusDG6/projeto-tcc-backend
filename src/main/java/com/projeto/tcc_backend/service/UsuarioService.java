@@ -22,4 +22,7 @@ public class UsuarioService {
     public void cadastrar(UsuarioBean usuario) {
         repository.cadastrar(usuario);
     }
+    public UsuarioBean login(String email, String senha) {
+       return repository.login(email, senha);
+    }
 }

@@ -29,10 +29,9 @@ public class UsuarioController {
         service.cadastrar(usuario);
         return "Cadastro feito com sucesso!";
     }
-    /*
+    
     @PostMapping("/login")
-    public String login(@RequestBody UsuarioBean usuario) {
-        return service.login(usuario);
-    }
-    */
+    public UsuarioBean login(@RequestBody UsuarioBean usuario) {
+        return service.login(usuario.getEmail(), usuario.getSenha());
+    }   
 }

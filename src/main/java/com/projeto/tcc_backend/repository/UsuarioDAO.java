@@ -38,7 +38,7 @@ public class UsuarioDAO {
         }
     }
     
-    public UsuarioBean login(String nome, String email, String senha) {
+    public UsuarioBean login(String email, String senha) {
         UsuarioBean usuarios = new UsuarioBean();
         ResultSet rs = null;
         
@@ -46,16 +46,14 @@ public class UsuarioDAO {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE nome = ? AND email = ? AND senha = ?");
+            stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
             
-            stmt.setString(1, nome);
-            stmt.setString(2, email);
-            stmt.setString(3, senha);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
             
             rs = stmt.executeQuery();
             
             if (rs.next()) {
-                usuarios.setNome(rs.getString("nome"));
                 usuarios.setEmail(rs.getString("email"));
                 usuarios.setSenha(rs.getString("senha"));
             }
