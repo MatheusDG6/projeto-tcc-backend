@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc_backend.repository;
 
-import com.projeto.tcc_backend.model.UsuarioBean;
+import com.projeto.tcc_backend.model.UsuarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UsuarioDAO {
     
-    public void cadastrar(UsuarioBean usuario) {
+    public void cadastrar(UsuarioDTO usuario) {
           try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -38,8 +38,8 @@ public class UsuarioDAO {
         }
     }
     
-    public UsuarioBean login(String email, String senha) {
-        UsuarioBean usuarios = new UsuarioBean();
+    public UsuarioDTO login(String email, String senha) {
+        UsuarioDTO usuarios = new UsuarioDTO();
         ResultSet rs = null;
         
         try{

@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc_backend.service;
 
-import com.projeto.tcc_backend.model.UsuarioBean;
+import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.repository.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,10 @@ public class UsuarioService {
     @Autowired
     private UsuarioDAO repository;
     
-    public void cadastrar(UsuarioBean usuario) {
+    public void cadastrar(UsuarioDTO usuario) {
         repository.cadastrar(usuario);
     }
-    public UsuarioBean login(String email, String senha) {
+    public UsuarioDTO login(String email, String senha) {
        return repository.login(email, senha);
     }
 }

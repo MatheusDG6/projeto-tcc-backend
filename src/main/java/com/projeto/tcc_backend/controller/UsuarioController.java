@@ -4,7 +4,7 @@
  */
 package com.projeto.tcc_backend.controller;
 
-import com.projeto.tcc_backend.model.UsuarioBean;
+import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,13 +25,13 @@ public class UsuarioController {
     private UsuarioService service;
     
     @PostMapping("/cadastrar")
-    public String cadastrar(@RequestBody UsuarioBean usuario) {
+    public String cadastrar(@RequestBody UsuarioDTO usuario) {
         service.cadastrar(usuario);
         return "Cadastro feito com sucesso!";
     }
     
     @PostMapping("/login")
-    public UsuarioBean login(@RequestBody UsuarioBean usuario) {
+    public UsuarioDTO login(@RequestBody UsuarioDTO usuario) {
         return service.login(usuario.getEmail(), usuario.getSenha());
     }   
 }

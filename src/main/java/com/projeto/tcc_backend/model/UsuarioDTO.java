@@ -8,16 +8,16 @@ package com.projeto.tcc_backend.model;
  *
  * @author mathe
  */
-public class UsuarioBean {
+public class UsuarioDTO {
     private int id_usuario;
     private String nome;
     private String email;
     private String senha;
 
-    public UsuarioBean() {
+    public UsuarioDTO() {
     }
 
-    public UsuarioBean(int id_usuario, String nome, String email, String senha) {
+    public UsuarioDTO(int id_usuario, String nome, String email, String senha) {
         this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;

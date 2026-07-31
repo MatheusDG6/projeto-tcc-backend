@@ -8,14 +8,14 @@ package com.projeto.tcc_backend.model;
  *
  * @author Aluno
  */
-public class UsuarioRequestBean {
+public class UsuarioRequestDTO {
     private String email;
     private String senha;
 
-    public UsuarioRequestBean() {
+    public UsuarioRequestDTO() {
     }
 
-    public UsuarioRequestBean(String email, String senha) {
+    public UsuarioRequestDTO(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
