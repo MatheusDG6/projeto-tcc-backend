@@ -16,14 +16,14 @@ import org.springframework.stereotype.Repository;
  * @author mathe
  */
 @Repository
-public class UsuarioDAO {
+public class UsuarioRepository {
     
     public void cadastrar(UsuarioDTO usuario) {
           try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conn.prepareStatement("INSERT INTO cadastro (nome, email, senha) VALUES (?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO usuario (nome, email, senha) VALUES (?,?,?)");
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
