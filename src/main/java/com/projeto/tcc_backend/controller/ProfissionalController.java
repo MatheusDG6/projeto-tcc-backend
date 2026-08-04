@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Aluno
  */
 @RestController
-@RequestMapping("")
+@RequestMapping("/profissional")
 public class ProfissionalController {
     
     @Autowired

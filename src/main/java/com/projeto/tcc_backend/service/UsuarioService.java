@@ -22,6 +22,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
     
+    @Autowired
+    private TokenService tokenService;
+    
     public void cadastrar(UsuarioDTO usuario) {
          String mensagem = "";
      
@@ -41,7 +44,7 @@ public class UsuarioService {
         repository.cadastrar(usuario);
     }
     
-    public String login(UserRequestDTO usuario) {
+    public String login(UsuarioDTO usuario) {
         
        String mensagem = "";
         if(usuario.getEmail().equals("")) {
@@ -53,6 +56,6 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);
         }
         UsuarioDTO dadosLogado = repository.login(usuario.getEmail(), usuario.getSenha());
-        return TokenService.gerarToken(dadosLogado); 
+        return tokenService.gerarToken(dadosLogado.getEmail(), dadosLogado.getSenha()); 
     }
 }

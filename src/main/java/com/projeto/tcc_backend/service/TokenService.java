@@ -5,8 +5,14 @@
 package com.projeto.tcc_backend.service;
 
 import com.projeto.tcc_backend.model.UserRequestDTO;
+import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.repository.ProfissionalRepository;
-import java.sql.Date;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import java.util.Date;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
@@ -51,14 +57,14 @@ public class TokenService {
                .signWith(this.getKeySign())
                .compact();
     }
-    public Profissional extrairClaim(String token) {
+    public UsuarioDTO extrairClaim(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(this.getKeySign())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
        
-        Profissional user = new Profissional();
+        UsuarioDTO user = new UsuarioDTO();
         user.setEmail(claims.get("email", String.class));
         return user;
     }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author mathe
  */
 @RestController
-@RequestMapping("")
+@RequestMapping("/usuario")
 public class UsuarioController {
     
     @Autowired
@@ -31,7 +31,9 @@ public class UsuarioController {
     }
     
     @PostMapping("/login")
-    public UsuarioDTO login(@RequestBody UsuarioDTO usuario) {
-        return service.login(usuario.getEmail(), usuario.getSenha());
+    public String login(@RequestBody UsuarioDTO usuario) {
+        String token = service.login(usuario);
+        System.out.println("token: "+token);
+        return "redirect:/login";
     }   
 }
