@@ -35,5 +35,5 @@ public class UsuarioController {
         String token = service.login(usuario);
         System.out.println("token: "+token);
         return "redirect:/login";
-    }   
+    }
 }
