@@ -6,7 +6,7 @@ package com.projeto.tcc_backend.service;
 
 import com.projeto.tcc_backend.model.UserRequestDTO;
 import com.projeto.tcc_backend.model.UsuarioDTO;
-import com.projeto.tcc_backend.repository.ProfissionalRepository;
+import com.projeto.tcc_backend.repository.ProfissaoRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -29,7 +29,7 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
    
-    private ProfissionalRepository repository;
+    private ProfissaoRepository repository;
    
     UserRequestDTO userRequest = new UserRequestDTO();
    

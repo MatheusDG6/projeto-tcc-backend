@@ -8,62 +8,44 @@ package com.projeto.tcc_backend.model;
  *
  * @author Aluno
  */
-public class ProfissionalDTO {
-    private int id_profissional;
-    private String nome;
-    private String email;
-    private String cpf;
+public class ProfissaoDTO {
+    private Integer profissao;
+    private String titulo;
     private String telefone;
     private String descricao;
+    private Double valor_hora;
     private String forma_pagamento;
     private String cidade;
     private String estado;
 
-    public ProfissionalDTO() {
+    public ProfissaoDTO() {
     }
 
-    public ProfissionalDTO(int id_profissional, String nome, String email, String cpf, String telefone, String descricao, String forma_pagamento, String cidade, String estado) {
-        this.id_profissional = id_profissional;
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
+    public ProfissaoDTO(Integer profissao, String titulo, String telefone, String descricao, Double valor_hora, String forma_pagamento, String cidade, String estado) {
+        this.profissao = profissao;
+        this.titulo = titulo;
         this.telefone = telefone;
         this.descricao = descricao;
+        this.valor_hora = valor_hora;
         this.forma_pagamento = forma_pagamento;
         this.cidade = cidade;
         this.estado = estado;
     }
 
-    public int getId_profissional() {
-        return id_profissional;
+    public int getProfissao() {
+        return profissao;
     }
 
-    public void setId_profissional(int id_profissional) {
-        this.id_profissional = id_profissional;
+    public void setProfissao(Integer profissao) {
+        this.profissao = profissao;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getTelefone() {
@@ -80,6 +62,14 @@ public class ProfissionalDTO {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Double getValor_hora() {
+        return valor_hora;
+    }
+
+    public void setValor_hora(Double valor_hora) {
+        this.valor_hora = valor_hora;
     }
 
     public String getForma_pagamento() {
@@ -104,5 +94,5 @@ public class ProfissionalDTO {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }   
+    }
 }

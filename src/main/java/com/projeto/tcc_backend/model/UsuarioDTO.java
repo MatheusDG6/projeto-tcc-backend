@@ -9,7 +9,7 @@ package com.projeto.tcc_backend.model;
  * @author mathe
  */
 public class UsuarioDTO {
-    private int id_usuario;
+    private Integer id_usuario;
     private String nome;
     private String email;
     private String senha;
@@ -18,7 +18,7 @@ public class UsuarioDTO {
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(int id_usuario, String nome, String email, String senha, String role) {
+    public UsuarioDTO(Integer id_usuario, String nome, String email, String senha, String role) {
         this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;
@@ -30,7 +30,7 @@ public class UsuarioDTO {
         return id_usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
 

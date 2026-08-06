@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
  * @author Aluno
  */
 public class MatchProfissional {
-    private int id_match;
+    private Integer id_match;
     private LocalDateTime data_match;
     private String status;
 
     public MatchProfissional() {
     }
 
-    public MatchProfissional(int id_match, LocalDateTime data_match, String status) {
+    public MatchProfissional(Integer id_match, LocalDateTime data_match, String status) {
         this.id_match = id_match;
         this.data_match = data_match;
         this.status = status;
@@ -28,7 +28,7 @@ public class MatchProfissional {
         return id_match;
     }
 
-    public void setId_match(int id_match) {
+    public void setId_match(Integer id_match) {
         this.id_match = id_match;
     }
 

@@ -9,7 +9,7 @@ package com.projeto.tcc_backend.model;
  * @author Aluno
  */
 public class EmpregadorDTO {
-    private int id_empregador;
+    private Integer id_empregador;
     private String nome_empresa;
     private String telefone;
     private String cnpj;
@@ -19,7 +19,7 @@ public class EmpregadorDTO {
     public EmpregadorDTO() {
     }
 
-    public EmpregadorDTO(int id_empregador, String nome_empresa, String telefone, String cnpj, String cidade, String estado) {
+    public EmpregadorDTO(Integer id_empregador, String nome_empresa, String telefone, String cnpj, String cidade, String estado) {
         this.id_empregador = id_empregador;
         this.nome_empresa = nome_empresa;
         this.telefone = telefone;
@@ -32,7 +32,7 @@ public class EmpregadorDTO {
         return id_empregador;
     }
 
-    public void setId_empregador(int id_empregador) {
+    public void setId_empregador(Integer id_empregador) {
         this.id_empregador = id_empregador;
     }
 

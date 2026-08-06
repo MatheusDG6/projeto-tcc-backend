@@ -46,7 +46,7 @@ public class UsuarioRepository {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conn.prepareStatement("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
+            stmt = conn.prepareStatement("SELECT * FROM usuario WHERE email = ? AND senha = ?");
             
             stmt.setString(1, email);
             stmt.setString(2, senha);

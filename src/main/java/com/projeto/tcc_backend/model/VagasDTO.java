@@ -9,7 +9,7 @@ package com.projeto.tcc_backend.model;
  * @author Aluno
  */
 public class VagasDTO {
-    private int id_vaga;
+    private Integer id_vaga;
     private String titulo;
     private String descricao;
     private Double salario;
@@ -20,7 +20,7 @@ public class VagasDTO {
     public VagasDTO() {
     }
 
-    public VagasDTO(int id_vaga, String titulo, String descricao, Double salario, String cidade, String estado, String status) {
+    public VagasDTO(Integer id_vaga, String titulo, String descricao, Double salario, String cidade, String estado, String status) {
         this.id_vaga = id_vaga;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -34,7 +34,7 @@ public class VagasDTO {
         return id_vaga;
     }
 
-    public void setId_vaga(int id_vaga) {
+    public void setId_vaga(Integer id_vaga) {
         this.id_vaga = id_vaga;
     }
 

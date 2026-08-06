@@ -4,8 +4,8 @@
  */
 package com.projeto.tcc_backend.controller;
 
-import com.projeto.tcc_backend.model.ProfissoesDTO;
-import com.projeto.tcc_backend.service.ProfissionalService;
+import com.projeto.tcc_backend.model.ProfissaoDTO;
+import com.projeto.tcc_backend.service.ProfissaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/profissional")
-public class ProfissionalController {
+public class ProfissaoController {
     
     @Autowired
-    private ProfissionalService service;
+    private ProfissaoService service;
     
     @PostMapping("/cadastrar")
-    public String cadastrarProfissao(@RequestBody ProfissoesDTO profissoes) {
+    public String cadastrarProfissao(@RequestBody ProfissaoDTO profissoes) {
         service.cadastrarProfissao(profissoes);
         return "Cadastro da profissão feito com sucesso!";
     }

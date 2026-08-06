@@ -4,8 +4,8 @@
  */
 package com.projeto.tcc_backend.service;
 
-import com.projeto.tcc_backend.model.ProfissoesDTO;
-import com.projeto.tcc_backend.repository.ProfissionalRepository;
+import com.projeto.tcc_backend.model.ProfissaoDTO;
+import com.projeto.tcc_backend.repository.ProfissaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -16,24 +16,28 @@ import org.springframework.web.server.ResponseStatusException;
  * @author Aluno
  */
 @Service
-public class ProfissionalService {
+public class ProfissaoService {
     
     @Autowired
-    private ProfissionalRepository repository;
+    private ProfissaoRepository repository;
     
-    public void cadastrarProfissao(ProfissoesDTO profissoes){
+    public void cadastrarProfissao(ProfissaoDTO profissoes){
         String mensagem = "";
      
         if(profissoes.getTitulo().equals("")) {
             mensagem = "Titulo não preenchido";
+        } else if(profissoes.getTelefone().equals("")) {
+            mensagem = "Telefone não preenchida";
         } else if(profissoes.getDescricao().equals("")) {
-            mensagem = "Descrição não preenchida";
-        } else if(profissoes.getExperiencia().equals("")) {
-            mensagem = "Experiencia não preenchida";
+            mensagem = "Descricao não preenchida";
         } else if(profissoes.getValor_hora().equals("")) {
             mensagem = "Valor hora não preenchida";
-        } else if(profissoes.getDisponibilidade().equals("")) {
-            mensagem = "Disponibilidade não preenchida";
+        } else if(profissoes.getForma_pagamento().equals("")) {
+            mensagem = "Forma pagamento não preenchida";
+        } else if(profissoes.getCidade().equals("")) {
+            mensagem = "Cidade não preenchida";
+        } else if(profissoes.getEstado().equals("")) {
+            mensagem = "Estado não preenchida";
         }
         
         if(!mensagem.equals("")) {
