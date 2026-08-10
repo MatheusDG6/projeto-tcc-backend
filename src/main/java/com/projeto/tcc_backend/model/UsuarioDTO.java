@@ -26,7 +26,7 @@ public class UsuarioDTO {
         this.role = role;
     }
 
-    public int getId_usuario() {
+    public Integer getId_usuario() {
         return id_usuario;
     }
 

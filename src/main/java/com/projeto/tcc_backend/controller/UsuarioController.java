@@ -34,6 +34,6 @@ public class UsuarioController {
     public String login(@RequestBody UsuarioDTO usuario) {
         String token = service.login(usuario);
         System.out.println("token: "+token);
-        return "redirect:/login";
+        return token;
     }
 }
