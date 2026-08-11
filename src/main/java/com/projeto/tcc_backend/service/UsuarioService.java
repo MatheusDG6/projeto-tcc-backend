@@ -44,7 +44,7 @@ public class UsuarioService {
         repository.cadastrar(usuario);
     }
     
-    public String login(UsuarioDTO usuario) {
+    public String login(UserRequestDTO usuario) {
         
        String mensagem = "";
         if(usuario.getEmail().equals("")) {

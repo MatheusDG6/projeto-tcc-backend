@@ -5,6 +5,7 @@
 package com.projeto.tcc_backend.service;
 
 import com.projeto.tcc_backend.model.ProfissaoDTO;
+import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.repository.ProfissaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -21,7 +22,7 @@ public class ProfissaoService {
     @Autowired
     private ProfissaoRepository repository;
     
-    public void cadastrarProfissao(ProfissaoDTO profissoes){
+    public void cadastrarProfissao(ProfissaoDTO profissoes, UsuarioDTO usuario){
         String mensagem = "";
      
         if(profissoes.getProfissao().equals("")) {
@@ -41,6 +42,6 @@ public class ProfissaoService {
         if(!mensagem.equals("")) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);
         }
-        repository.cadastrarProfissao(profissoes);
+        repository.cadastrarProfissao(profissoes, usuario);
     }
 }

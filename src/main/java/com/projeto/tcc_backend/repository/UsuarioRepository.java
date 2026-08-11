@@ -54,6 +54,7 @@ public class UsuarioRepository {
             rs = stmt.executeQuery();
             
             if (rs.next()) {
+                usuarios.setId_usuario(rs.getInt("id_usuario"));
                 usuarios.setEmail(rs.getString("email"));
                 usuarios.setSenha(rs.getString("senha"));
             }
