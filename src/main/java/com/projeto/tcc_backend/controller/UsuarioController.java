@@ -37,7 +37,7 @@ public class UsuarioController {
     }
     
     @PostMapping("/login")
-    public String login(@ModelAttribute UserRequestDTO user, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+    public String login(@RequestBody UserRequestDTO user, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         try {
             String userLogged = service.login(user);
 
@@ -51,6 +51,7 @@ public class UsuarioController {
             redirectAttributes.addFlashAttribute("mensagemErro", mensagemErroBackend);
             model.addAttribute("user", new UserRequestDTO());
             return "redirect:/login";
+            
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("mensagemErro", e.getMessage());
             return "redirect:/login";

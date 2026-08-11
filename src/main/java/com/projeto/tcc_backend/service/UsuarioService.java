@@ -47,6 +47,7 @@ public class UsuarioService {
     public String login(UserRequestDTO usuario) {
         
        String mensagem = "";
+        
         if(usuario.getEmail().equals("")) {
             mensagem = "Email não preenchido";
         } else if (usuario.getSenha().equals("")) {
