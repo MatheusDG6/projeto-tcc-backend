@@ -9,11 +9,9 @@ package com.projeto.tcc_backend.model;
  * @author Aluno
  */
 public class ProfissaoDTO {
-    private Integer profissao;
-    private String titulo;
+    private String profissao;
     private String telefone;
     private String descricao;
-    private Double valor_hora;
     private String forma_pagamento;
     private String cidade;
     private String estado;
@@ -21,31 +19,21 @@ public class ProfissaoDTO {
     public ProfissaoDTO() {
     }
 
-    public ProfissaoDTO(Integer profissao, String titulo, String telefone, String descricao, Double valor_hora, String forma_pagamento, String cidade, String estado) {
+    public ProfissaoDTO(String profissao, String telefone, String descricao, String forma_pagamento, String cidade, String estado) {
         this.profissao = profissao;
-        this.titulo = titulo;
         this.telefone = telefone;
         this.descricao = descricao;
-        this.valor_hora = valor_hora;
         this.forma_pagamento = forma_pagamento;
         this.cidade = cidade;
         this.estado = estado;
     }
 
-    public int getProfissao() {
+    public String getProfissao() {
         return profissao;
     }
 
-    public void setProfissao(Integer profissao) {
+    public void setProfissao(String profissao) {
         this.profissao = profissao;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getTelefone() {
@@ -62,14 +50,6 @@ public class ProfissaoDTO {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Double getValor_hora() {
-        return valor_hora;
-    }
-
-    public void setValor_hora(Double valor_hora) {
-        this.valor_hora = valor_hora;
     }
 
     public String getForma_pagamento() {

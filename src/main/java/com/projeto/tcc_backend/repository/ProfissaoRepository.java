@@ -22,14 +22,14 @@ public class ProfissaoRepository {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conn.prepareStatement("INSERT INTO profissoes (titulo, telefone, descricao, valor_hora, forma_pagamento, cidade, estado) VALUES (?,?,?,?,?,?,?)");
-            stmt.setString(1, profissoes.getTitulo());
+            stmt = conn.prepareStatement("INSERT INTO profissoes (profissao, telefone, descricao, forma_pagamento, cidade, estado, id_usuario) VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, profissoes.getProfissao());
             stmt.setString(2, profissoes.getTelefone());
             stmt.setString(3, profissoes.getDescricao());
-            stmt.setDouble(4, profissoes.getValor_hora());
-            stmt.setString(5, profissoes.getForma_pagamento());
-            stmt.setString(6, profissoes.getCidade());
-            stmt.setString(7, profissoes.getEstado());
+            stmt.setString(4, profissoes.getForma_pagamento());
+            stmt.setString(5, profissoes.getCidade());
+            stmt.setString(6, profissoes.getEstado());
+            stmt.setString(7, profissoes.getId_usuario());
             
             
             int linhasAfetadas = stmt.executeUpdate();

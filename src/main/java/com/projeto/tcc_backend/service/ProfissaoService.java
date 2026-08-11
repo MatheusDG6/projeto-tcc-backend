@@ -24,14 +24,12 @@ public class ProfissaoService {
     public void cadastrarProfissao(ProfissaoDTO profissoes){
         String mensagem = "";
      
-        if(profissoes.getTitulo().equals("")) {
-            mensagem = "Titulo não preenchido";
+        if(profissoes.getProfissao().equals("")) {
+            mensagem = "Profissão não preenchido";
         } else if(profissoes.getTelefone().equals("")) {
             mensagem = "Telefone não preenchida";
         } else if(profissoes.getDescricao().equals("")) {
             mensagem = "Descricao não preenchida";
-        } else if(profissoes.getValor_hora().equals("")) {
-            mensagem = "Valor hora não preenchida";
         } else if(profissoes.getForma_pagamento().equals("")) {
             mensagem = "Forma pagamento não preenchida";
         } else if(profissoes.getCidade().equals("")) {
