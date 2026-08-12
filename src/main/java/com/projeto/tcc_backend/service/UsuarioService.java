@@ -56,7 +56,8 @@ public class UsuarioService {
         if(!mensagem.equals("")) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);
         }
+        
         UsuarioDTO dadosLogado = repository.login(usuario.getEmail(), usuario.getSenha());
-        return tokenService.gerarToken(dadosLogado.getEmail(), dadosLogado.getSenha()); 
+        return tokenService.gerarToken(dadosLogado);
     }
 }

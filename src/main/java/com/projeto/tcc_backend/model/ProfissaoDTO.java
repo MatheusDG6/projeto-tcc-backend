@@ -16,7 +16,7 @@ public class ProfissaoDTO {
     private String cidade;
     private String estado;
     private Integer id_usuario;
-
+    
     public ProfissaoDTO() {
     }
 

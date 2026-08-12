@@ -22,26 +22,26 @@ public class ProfissaoService {
     @Autowired
     private ProfissaoRepository repository;
     
-    public void cadastrarProfissao(ProfissaoDTO profissoes, UsuarioDTO usuario){
+    public void cadastrarProfissao(ProfissaoDTO profissoes){
         String mensagem = "";
      
         if(profissoes.getProfissao().equals("")) {
             mensagem = "Profissão não preenchido";
         } else if(profissoes.getTelefone().equals("")) {
-            mensagem = "Telefone não preenchida";
+            mensagem = "Telefone não preenchido";
         } else if(profissoes.getDescricao().equals("")) {
-            mensagem = "Descricao não preenchida";
+            mensagem = "Descricao não preenchido";
         } else if(profissoes.getForma_pagamento().equals("")) {
-            mensagem = "Forma pagamento não preenchida";
+            mensagem = "Forma pagamento não preenchido";
         } else if(profissoes.getCidade().equals("")) {
-            mensagem = "Cidade não preenchida";
+            mensagem = "Cidade não preenchido";
         } else if(profissoes.getEstado().equals("")) {
-            mensagem = "Estado não preenchida";
+            mensagem = "Estado não preenchido";
         }
         
         if(!mensagem.equals("")) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);
         }
-        repository.cadastrarProfissao(profissoes, usuario);
+        repository.cadastrarProfissao(profissoes);
     }
 }

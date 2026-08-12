@@ -41,25 +41,22 @@ public class TokenService {
     public String gerarToken(UsuarioDTO usuario) {
         if (usuario == null
                 || usuario.getEmail() == null
-                || usuario.getEmail().equals("")
-                || usuario.getSenha() == null
-                || usuario.getSenha().equals("")) {
+                || usuario.getEmail().equals("")) {
 
             throw new ResponseStatusException(
                     HttpStatusCode.valueOf(400),
                     "Um ou mais campos faltantes"
             );
         }
-        System.out.println("Email:" + email);
+        System.out.println("Email:" + usuario.getEmail());
         System.out.println("ID: " + usuario.getId_usuario());
         
         return Jwts.builder()
                .subject(usuario.getEmail())
                .claim("id_usuario", usuario.getId_usuario())
                .claim("nome", usuario.getNome())
-               .claim("email", email)
+               .claim("email", usuario.getEmail())
                .claim("role", usuario.getRole())
- 
                .issuedAt(new Date())
                .expiration(new Date(System.currentTimeMillis() + 3000000))
                .signWith(this.getKeySign())

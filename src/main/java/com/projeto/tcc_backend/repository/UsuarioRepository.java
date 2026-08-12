@@ -47,7 +47,6 @@ public class UsuarioRepository {
             PreparedStatement stmt = null;
             
             stmt = conn.prepareStatement("SELECT * FROM usuario WHERE email = ? AND senha = ?");
-            
             stmt.setString(1, email);
             stmt.setString(2, senha);
             
@@ -55,8 +54,10 @@ public class UsuarioRepository {
             
             if (rs.next()) {
                 usuarios.setId_usuario(rs.getInt("id_usuario"));
+                usuarios.setNome(rs.getString("nome"));
                 usuarios.setEmail(rs.getString("email"));
                 usuarios.setSenha(rs.getString("senha"));
+                usuarios.setRole(rs.getString("role"));
             }
         }catch(SQLException e) {
             e.printStackTrace();

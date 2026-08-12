@@ -5,7 +5,6 @@
 package com.projeto.tcc_backend.repository;
 
 import com.projeto.tcc_backend.model.ProfissaoDTO;
-import com.projeto.tcc_backend.model.UsuarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProfissaoRepository {
     
-    public void cadastrarProfissao(ProfissaoDTO profissoes, UsuarioDTO usuario){
+    public void cadastrarProfissao(ProfissaoDTO profissoes){
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -30,7 +29,7 @@ public class ProfissaoRepository {
             stmt.setString(4, profissoes.getForma_pagamento());
             stmt.setString(5, profissoes.getCidade());
             stmt.setString(6, profissoes.getEstado());
-            stmt.setInt(7, usuario.getId_usuario());
+            stmt.setInt(7, profissoes.getId_usuario());
             
             
             int linhasAfetadas = stmt.executeUpdate();

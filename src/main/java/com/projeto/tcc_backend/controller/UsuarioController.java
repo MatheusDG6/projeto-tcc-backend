@@ -37,7 +37,8 @@ public class UsuarioController {
     }
     
     @PostMapping("/login")
-    public String login(@RequestBody UserRequestDTO user, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+    public String login(@RequestBody UserRequestDTO user) {
+        /*
         try {
             String userLogged = service.login(user);
 
@@ -56,5 +57,7 @@ public class UsuarioController {
             redirectAttributes.addFlashAttribute("mensagemErro", e.getMessage());
             return "redirect:/login";
         }
+    */
+        return service.login(user);
     }
 }

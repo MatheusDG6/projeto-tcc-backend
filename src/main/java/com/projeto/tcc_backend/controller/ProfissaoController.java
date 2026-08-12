@@ -26,11 +26,12 @@ public class ProfissaoController {
     private ProfissaoService service;
     
     @PostMapping("/cadastrar")
-    public String cadastrarProfissao(@RequestBody ProfissaoDTO profissoes, UsuarioDTO usuario) {
-        System.out.println("aqui");
-        System.out.println(usuario.getNome());
-        System.out.println("aqui");
-        service.cadastrarProfissao(profissoes, usuario);
+    public String cadastrarProfissao(@RequestBody ProfissaoDTO profissoes) {
+        
+        
+        System.out.println("ID USUARIO RECEBIDO: " + profissoes.getId_usuario());
+        
+        service.cadastrarProfissao(profissoes);
            
         return "Cadastro da profissão feito com sucesso!";
     }
