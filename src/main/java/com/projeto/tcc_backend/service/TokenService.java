@@ -38,20 +38,28 @@ public class TokenService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
    
-    public String gerarToken(String email, String senha) {
-       if(
-           (
-            email.equals("") ||
-               senha.equals(""))
-         ){
-           throw new ResponseStatusException(HttpStatusCode.valueOf(400),
-           "Um ou mais campos faltantes");
-       }
+    public String gerarToken(UsuarioDTO usuario) {
+        if (usuario == null
+                || usuario.getEmail() == null
+                || usuario.getEmail().equals("")
+                || usuario.getSenha() == null
+                || usuario.getSenha().equals("")) {
+
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(400),
+                    "Um ou mais campos faltantes"
+            );
+        }
         System.out.println("Email:" + email);
-       return Jwts.builder()
-               .subject(email)
+        System.out.println("ID: " + usuario.getId_usuario());
+        
+        return Jwts.builder()
+               .subject(usuario.getEmail())
+               .claim("id_usuario", usuario.getId_usuario())
+               .claim("nome", usuario.getNome())
                .claim("email", email)
-               .claim("senha", senha)
+               .claim("role", usuario.getRole())
+ 
                .issuedAt(new Date())
                .expiration(new Date(System.currentTimeMillis() + 3000000))
                .signWith(this.getKeySign())
@@ -65,7 +73,11 @@ public class TokenService {
                 .getPayload();
        
         UsuarioDTO user = new UsuarioDTO();
+        user.setId_usuario(claims.get("id_usuario", Integer.class));
+        user.setNome(claims.get("nome", String.class));
         user.setEmail(claims.get("email", String.class));
+        user.setRole(claims.get("role", String.class));
+
         return user;
     }
    
