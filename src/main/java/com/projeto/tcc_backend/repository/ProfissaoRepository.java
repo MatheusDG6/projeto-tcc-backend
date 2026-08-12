@@ -7,7 +7,10 @@ package com.projeto.tcc_backend.repository;
 import com.projeto.tcc_backend.model.ProfissaoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -40,5 +43,38 @@ public class ProfissaoRepository {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public List<ProfissaoDTO> listarProfissoes() {
+           List<ProfissaoDTO> lista = new ArrayList<>();
+
+        try {
+
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conn.prepareStatement("SELECT profissao, telefone, descricao, forma_pagamento, cidade, estado, id_usuario FROM profissoes");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                ProfissaoDTO profissao = new ProfissaoDTO();
+
+                profissao.setProfissao(rs.getString("profissao"));
+                profissao.setTelefone(rs.getString("telefone"));
+                profissao.setDescricao(rs.getString("descricao"));
+                profissao.setForma_pagamento(rs.getString("forma_pagamento"));
+                profissao.setCidade(rs.getString("cidade"));
+                profissao.setEstado(rs.getString("estado"));
+                profissao.setId_usuario(rs.getInt("id_usuario"));
+
+                lista.add(profissao);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }

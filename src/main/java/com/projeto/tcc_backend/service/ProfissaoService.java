@@ -7,6 +7,7 @@ package com.projeto.tcc_backend.service;
 import com.projeto.tcc_backend.model.ProfissaoDTO;
 import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.repository.ProfissaoRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,9 @@ public class ProfissaoService {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), mensagem);
         }
         repository.cadastrarProfissao(profissoes);
+    }
+    
+    public List<ProfissaoDTO> listarProfissoes() {
+        return repository.listarProfissoes();
     }
 }

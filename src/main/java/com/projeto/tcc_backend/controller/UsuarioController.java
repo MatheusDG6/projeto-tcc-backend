@@ -57,7 +57,7 @@ public class UsuarioController {
             redirectAttributes.addFlashAttribute("mensagemErro", e.getMessage());
             return "redirect:/login";
         }
-    */
+        */
         return service.login(user);
     }
 }
