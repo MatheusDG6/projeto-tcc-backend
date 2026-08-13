@@ -23,10 +23,11 @@ public class UsuarioRepository {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conn.prepareStatement("INSERT INTO usuario (nome, email, senha) VALUES (?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO usuario (nome, email, senha, role) VALUES (?,?,?,?)");
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getRole());
             
             int linhasAfetadas = stmt.executeUpdate();
             if (linhasAfetadas == 0) {
