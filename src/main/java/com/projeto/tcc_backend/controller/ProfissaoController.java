@@ -4,11 +4,11 @@
  */
 package com.projeto.tcc_backend.controller;
 
-import ch.qos.logback.core.CoreConstants;
 import com.projeto.tcc_backend.model.ProfissaoDTO;
-import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.service.ProfissaoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +34,10 @@ public class ProfissaoController {
         service.cadastrarProfissao(profissoes);
            
         return "Cadastro da profissão feito com sucesso!";
+    }
+    
+    @GetMapping("/listar")
+    public List<ProfissaoDTO> listarProfissoes() {
+        return service.listarProfissoes();
     }
 }
