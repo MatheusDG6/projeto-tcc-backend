@@ -10,21 +10,25 @@ import java.time.LocalDateTime;
  *
  * @author Aluno
  */
-public class MatchProfissional {
+public class MatchProfissionalDTO {
     private Integer id_match;
     private LocalDateTime data_match;
     private String status;
+    private Integer id_usuario;
+    private Integer id_profissao;
 
-    public MatchProfissional() {
+    public MatchProfissionalDTO() {
     }
 
-    public MatchProfissional(Integer id_match, LocalDateTime data_match, String status) {
+    public MatchProfissionalDTO(Integer id_match, LocalDateTime data_match, String status, Integer id_usuario, Integer id_profissao) {
         this.id_match = id_match;
         this.data_match = data_match;
         this.status = status;
+        this.id_usuario = id_usuario;
+        this.id_profissao = id_profissao;
     }
 
-    public int getId_match() {
+    public Integer getId_match() {
         return id_match;
     }
 
@@ -47,6 +51,20 @@ public class MatchProfissional {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
+    public Integer getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public Integer getId_profissao() {
+        return id_profissao;
+    }
+
+    public void setId_profissao(Integer id_profissao) {
+        this.id_profissao = id_profissao;
+    }   
 }

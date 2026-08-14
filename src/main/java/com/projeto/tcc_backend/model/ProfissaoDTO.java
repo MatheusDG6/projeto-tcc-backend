@@ -16,11 +16,12 @@ public class ProfissaoDTO {
     private String cidade;
     private String estado;
     private Integer id_usuario;
-    
+    private Integer id_profissao;
+
     public ProfissaoDTO() {
     }
 
-    public ProfissaoDTO(String profissao, String telefone, String descricao, String forma_pagamento, String cidade, String estado, Integer id_usuario) {
+    public ProfissaoDTO(String profissao, String telefone, String descricao, String forma_pagamento, String cidade, String estado, Integer id_usuario, Integer id_profissao) {
         this.profissao = profissao;
         this.telefone = telefone;
         this.descricao = descricao;
@@ -28,6 +29,7 @@ public class ProfissaoDTO {
         this.cidade = cidade;
         this.estado = estado;
         this.id_usuario = id_usuario;
+        this.id_profissao = id_profissao;
     }
 
     public String getProfissao() {
@@ -85,6 +87,12 @@ public class ProfissaoDTO {
     public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
-    
-    
+
+    public Integer getId_profissao() {
+        return id_profissao;
+    }
+
+    public void setId_profissao(Integer id_profissao) {
+        this.id_profissao = id_profissao;
+    }
 }

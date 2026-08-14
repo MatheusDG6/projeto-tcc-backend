@@ -53,7 +53,7 @@ public class ProfissaoRepository {
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conn.prepareStatement("SELECT profissao, telefone, descricao, forma_pagamento, cidade, estado, id_usuario FROM profissoes");
+            stmt = conn.prepareStatement("SELECT profissao, telefone, descricao, forma_pagamento, cidade, estado, id_usuario, id_profissao FROM profissoes");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -67,7 +67,8 @@ public class ProfissaoRepository {
                 profissao.setCidade(rs.getString("cidade"));
                 profissao.setEstado(rs.getString("estado"));
                 profissao.setId_usuario(rs.getInt("id_usuario"));
-
+                profissao.setId_profissao(rs.getInt("id_profissao"));
+                
                 lista.add(profissao);
             }
 
