@@ -18,26 +18,19 @@ import org.springframework.stereotype.Repository;
 public class MatchRepository {
 
     public void cadastrarMatch(MatchProfissionalDTO match) {
-
         try {
-
             Connection conn = Conexao.conectar();
-
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO match_profissional (data_match, status, id_usuario, id_profissao) VALUES (NOW(), ?, ?, ?)"
-            );
-
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO match_profissional (data_match, status, id_usuario, id_profissao) VALUES (NOW(), ?, ?, ?)");
             stmt.setString(1, match.getStatus());
             stmt.setInt(2, match.getId_usuario());
             stmt.setInt(3, match.getId_profissao());
 
             int linhasAfetadas = stmt.executeUpdate();
-
             if (linhasAfetadas == 0) {
                 throw new SQLException(
                         "Falha na atualização - Nenhuma linha foi afetada"
                 );
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
