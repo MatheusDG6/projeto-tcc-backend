@@ -7,7 +7,10 @@ package com.projeto.tcc_backend.repository;
 import com.projeto.tcc_backend.model.MatchProfissionalDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -33,6 +36,107 @@ public class MatchRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public List<MatchProfissionalDTO> listarSolicitacoesProfissional(Integer id_usuario) {
+        List<MatchProfissionalDTO> lista = new ArrayList<>();
+        
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT m.id_match, "
+                    + "m.data_match, "
+                    + "m.status, "
+                    + "m.id_usuario, "
+                    + "m.id_profissao "
+                    + "FROM match_profissional m "
+                    + "INNER JOIN profissoes p "
+                    + "ON m.id_profissao = p.id_profissao "
+                    + "WHERE p.id_usuario = ? "
+                    + "AND m.status = 'PENDENTE'"
+            );
+            
+            stmt.setInt(1, id_usuario);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                MatchProfissionalDTO match = new MatchProfissionalDTO();
+                match.setId_match(rs.getInt("id_match"));
+                match.setData_match(rs.getTimestamp("data_match").toLocalDateTime());
+                match.setStatus(rs.getString("status"));
+                match.setId_usuario(rs.getInt("id_usuario"));
+                match.setId_profissao(rs.getInt("id_profissao"));
+
+                lista.add(match);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    public void aceitarMatch(Integer id_match, Integer id_usuario) {
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE match_profissional m "
+                    + "INNER JOIN profissoes p "
+                    + "ON m.id_profissao = p.id_profissao "
+                    + "SET m.status = 'ACEITO' "
+                    + "WHERE m.id_match = ? "
+                    + "AND p.id_usuario = ? "
+                    + "AND m.status = 'PENDENTE'"
+            );
+
+            stmt.setInt(1, id_match);
+            stmt.setInt(2, id_usuario);
+
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas == 0) {
+                throw new SQLException(
+                        "Match não encontrado, não pertence ao profissional "
+                        + "ou já foi respondido."
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao aceitar Match.");
+        }
+    }
+    
+    public void recusarMatch(Integer id_match, Integer id_usuario) {
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE match_profissional m "
+                    + "INNER JOIN profissoes p "
+                    + "ON m.id_profissao = p.id_profissao "
+                    + "SET m.status = 'RECUSADO' "
+                    + "WHERE m.id_match = ? "
+                    + "AND p.id_usuario = ? "
+                    + "AND m.status = 'PENDENTE'"
+            );
+
+            stmt.setInt(1, id_match);
+            stmt.setInt(2, id_usuario);
+
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas == 0) {
+                throw new SQLException(
+                        "Match não encontrado, não pertence ao profissional "
+                        + "ou já foi respondido."
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao recusar Match.");
         }
     }
 }

@@ -7,6 +7,7 @@ package com.projeto.tcc_backend.service;
 import com.projeto.tcc_backend.model.MatchProfissionalDTO;
 import com.projeto.tcc_backend.model.UsuarioDTO;
 import com.projeto.tcc_backend.repository.MatchRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,83 @@ public class MatchService {
         match.setId_usuario(usuario.getId_usuario());
         match.setStatus("PENDENTE");
         repository.cadastrarMatch(match);
+    }
+    
+    public List<MatchProfissionalDTO> listarSolicitacoesProfissional(Integer id_usuario) {
+
+        if (id_usuario == null) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Usuário não informado"
+            );
+        }
+
+        return repository.listarSolicitacoesProfissional(id_usuario);
+    }
+    
+    public void aceitarMatch(Integer id_match, UsuarioDTO usuario) {
+
+        if (usuario == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(401),
+                    "Usuário não identificado"
+            );
+        }
+
+        if (usuario.getId_usuario() == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(401),
+                    "ID do usuário não identificado"
+            );
+        }
+
+        if (!"PROFISSIONAL".equals(usuario.getRole())) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(403),
+                    "Apenas profissionais podem aceitar Match"
+            );
+        }
+
+        if (id_match == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(400),
+                    "Match não informado"
+            );
+        }
+
+        repository.aceitarMatch(id_match, usuario.getId_usuario()
+        );
+    }
+    
+    public void recusarMatch(Integer id_match, UsuarioDTO usuario) {
+
+        if (usuario == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(401),
+                    "Usuário não identificado"
+            );
+        }
+
+        if (usuario.getId_usuario() == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(401),
+                    "ID do usuário não identificado"
+            );
+        }
+
+        if (!"PROFISSIONAL".equals(usuario.getRole())) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(403),
+                    "Apenas profissionais podem recusar Match"
+            );
+        }
+
+        if (id_match == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(400),
+                    "Match não informado"
+            );
+        }
+
+        repository.recusarMatch(id_match, usuario.getId_usuario()
+        );
     }
 }
