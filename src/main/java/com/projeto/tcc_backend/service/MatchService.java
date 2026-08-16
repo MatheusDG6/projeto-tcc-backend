@@ -135,4 +135,16 @@ public class MatchService {
         repository.recusarMatch(id_match, usuario.getId_usuario()
         );
     }
+    
+    public List<MatchProfissionalDTO> listarMatchesAceitos(Integer id_usuario) {
+
+    if (id_usuario == null) {
+        throw new ResponseStatusException(
+                HttpStatusCode.valueOf(400),
+                "Usuário não informado"
+        );
+    }
+
+    return repository.listarMatchesAceitos(id_usuario);
+    }
 }

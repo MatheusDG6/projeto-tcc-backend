@@ -142,4 +142,36 @@ public class MatchController {
         service.recusarMatch(id_match, usuario);
         return "Match recusado com sucesso!";
     }
+    
+    @GetMapping("/aceitos")
+    public List<MatchProfissionalDTO> listarMatchesAceitos(
+            @RequestHeader("Authorization") String authorization) {
+
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(401),
+                    "Token não informado"
+            );
+        }
+
+        String token = authorization.substring(7);
+
+        if (!tokenService.validarToken(token)) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(401),
+                    "Token inválido ou expirado"
+            );
+        }
+
+        UsuarioDTO usuario = tokenService.extrairClaim(token);
+
+        if (!"PROFISSIONAL".equals(usuario.getRole())) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(403),
+                    "Apenas profissionais podem visualizar Matches aceitos"
+            );
+        }
+
+        return service.listarMatchesAceitos(usuario.getId_usuario());
+    }
 }

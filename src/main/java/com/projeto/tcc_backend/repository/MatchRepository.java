@@ -139,4 +139,48 @@ public class MatchRepository {
             throw new RuntimeException("Erro ao recusar Match.");
         }
     }
+    
+    public List<MatchProfissionalDTO> listarMatchesAceitos(Integer id_usuario) {
+        List<MatchProfissionalDTO> lista = new ArrayList<>();
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT m.id_match, "
+                    + "m.data_match, "
+                    + "m.status, "
+                    + "m.id_usuario, "
+                    + "m.id_profissao, "
+                    + "u.nome AS nome_solicitante, "
+                    + "u.email AS email_solicitante "
+                    + "FROM match_profissional m "
+                    + "INNER JOIN profissoes p "
+                    + "ON m.id_profissao = p.id_profissao "
+                    + "INNER JOIN usuario u "
+                    + "ON m.id_usuario = u.id_usuario "
+                    + "WHERE p.id_usuario = ? "
+                    + "AND m.status = 'ACEITO'"
+            );
+
+            stmt.setInt(1, id_usuario);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                MatchProfissionalDTO match = new MatchProfissionalDTO();
+                match.setId_match(rs.getInt("id_match"));
+                match.setData_match(rs.getTimestamp("data_match").toLocalDateTime());
+                match.setStatus(rs.getString("status"));
+                match.setId_usuario(rs.getInt("id_usuario"));
+                match.setId_profissao(rs.getInt("id_profissao"));
+                match.setNome_solicitante(rs.getString("nome_solicitante"));
+                match.setEmail_solicitante(rs.getString("email_solicitante"));
+
+                lista.add(match);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
 }
