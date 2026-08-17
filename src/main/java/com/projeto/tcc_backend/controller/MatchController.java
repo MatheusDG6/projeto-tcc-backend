@@ -57,7 +57,7 @@ public class MatchController {
         service.cadastrarMatch(match, usuario);
         return "Solicitação de Match enviada com sucesso!";
     }
-    
+ 
     @GetMapping("/solicitacoes")
     public List<MatchProfissionalDTO> listarSolicitacoes(
             @RequestHeader("Authorization") String authorization) {
@@ -80,14 +80,31 @@ public class MatchController {
 
         UsuarioDTO usuario = tokenService.extrairClaim(token);
 
-        if (!"PROFISSIONAL".equals(usuario.getRole())) {
+        if (usuario == null || usuario.getId_usuario() == null) {
             throw new ResponseStatusException(
-                    HttpStatusCode.valueOf(403),
-                    "Apenas profissionais podem visualizar solicitações de Match"
+                    HttpStatusCode.valueOf(401),
+                    "Usuário não identificado"
             );
         }
 
-        return service.listarSolicitacoesProfissional(usuario.getId_usuario()
+        if ("PROFISSIONAL".equals(usuario.getRole())) {
+
+            return service.listarSolicitacoesProfissional(
+                    usuario.getId_usuario()
+            );
+        }
+
+        if ("CLIENTE".equals(usuario.getRole())
+                || "EMPREGADOR".equals(usuario.getRole())) {
+
+            return service.listarMatchesAceitosSolicitante(
+                    usuario.getId_usuario()
+            );
+        }
+
+        throw new ResponseStatusException(
+                HttpStatusCode.valueOf(403),
+                "Tipo de usuário não permitido"
         );
     }
     
@@ -165,13 +182,26 @@ public class MatchController {
 
         UsuarioDTO usuario = tokenService.extrairClaim(token);
 
-        if (!"PROFISSIONAL".equals(usuario.getRole())) {
+        if (usuario == null || usuario.getId_usuario() == null) {
             throw new ResponseStatusException(
-                    HttpStatusCode.valueOf(403),
-                    "Apenas profissionais podem visualizar Matches aceitos"
+                    HttpStatusCode.valueOf(401),
+                    "Usuário não identificado"
             );
         }
 
-        return service.listarMatchesAceitos(usuario.getId_usuario());
+        if (!"PROFISSIONAL".equals(usuario.getRole())
+                && !"CLIENTE".equals(usuario.getRole())
+                && !"EMPREGADOR".equals(usuario.getRole())) {
+
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(403),
+                    "Tipo de usuário não permitido"
+            );
+        }
+
+        return service.listarMatchesAceitos(
+                usuario.getId_usuario(),
+                usuario.getRole()
+        );
     }
 }

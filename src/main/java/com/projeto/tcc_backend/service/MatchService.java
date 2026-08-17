@@ -68,6 +68,18 @@ public class MatchService {
         return repository.listarSolicitacoesProfissional(id_usuario);
     }
     
+    public List<MatchProfissionalDTO> listarMatchesAceitosSolicitante(Integer id_usuario) {
+
+        if (id_usuario == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(400),
+                    "Usuário não informado"
+            );
+        }
+
+        return repository.listarMatchesAceitosSolicitante(id_usuario);
+    }
+    
     public void aceitarMatch(Integer id_match, UsuarioDTO usuario) {
 
         if (usuario == null) {
@@ -136,15 +148,30 @@ public class MatchService {
         );
     }
     
-    public List<MatchProfissionalDTO> listarMatchesAceitos(Integer id_usuario) {
+    public List<MatchProfissionalDTO> listarMatchesAceitos(Integer id_usuario, String role) {
 
-    if (id_usuario == null) {
+        if (id_usuario == null) {
+            throw new ResponseStatusException(
+                    HttpStatusCode.valueOf(400),
+                    "Usuário não informado"
+            );
+        }
+
+        if ("PROFISSIONAL".equals(role)) {
+
+            return repository.listarMatchesAceitos(id_usuario);
+
+        }
+
+        if ("CLIENTE".equals(role) || "EMPREGADOR".equals(role)) {
+
+            return repository.listarMatchesAceitosSolicitante(id_usuario);
+
+        }
+
         throw new ResponseStatusException(
-                HttpStatusCode.valueOf(400),
-                "Usuário não informado"
+                HttpStatusCode.valueOf(403),
+                "Tipo de usuário não permitido"
         );
-    }
-
-    return repository.listarMatchesAceitos(id_usuario);
     }
 }
