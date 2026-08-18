@@ -79,6 +79,19 @@ public class MatchController {
         }
 
         UsuarioDTO usuario = tokenService.extrairClaim(token);
+        
+        System.out.println("===== LISTAR MEUS MATCHES =====");
+
+        if (usuario != null) {
+            System.out.println("ID USUARIO: " + usuario.getId_usuario());
+            System.out.println("NOME: " + usuario.getNome());
+            System.out.println("EMAIL: " + usuario.getEmail());
+            System.out.println("ROLE: " + usuario.getRole());
+        } else {
+            System.out.println("USUARIO: NULL");
+        }
+
+        System.out.println("===============================");
 
         if (usuario == null || usuario.getId_usuario() == null) {
             throw new ResponseStatusException(
@@ -88,10 +101,33 @@ public class MatchController {
         }
 
         if ("PROFISSIONAL".equals(usuario.getRole())) {
+            
+            System.out.println("===== RESULTADO PROFISSIONAL =====");
 
+            List<MatchProfissionalDTO> resultado
+                    = service.listarSolicitacoesProfissional(
+                            usuario.getId_usuario()
+                    );
+
+            System.out.println("QUANTIDADE: " + resultado.size());
+
+            for (MatchProfissionalDTO match : resultado) {
+                System.out.println(
+                        "MATCH: " + match.getId_match()
+                        + " | STATUS: " + match.getStatus()
+                        + " | SOLICITANTE: " + match.getNome_solicitante()
+                        + " | EMAIL: " + match.getEmail_solicitante()
+                );
+            }
+
+            System.out.println("==================================");
+            
+            return resultado;
+            /*
             return service.listarSolicitacoesProfissional(
                     usuario.getId_usuario()
             );
+            */
         }
 
         if ("CLIENTE".equals(usuario.getRole())
@@ -130,7 +166,26 @@ public class MatchController {
         }
 
         UsuarioDTO usuario = tokenService.extrairClaim(token);
+        
+        System.out.println("===== ACEITAR MATCH =====");
+        System.out.println("ID MATCH: " + id_match);
+
+        if (usuario != null) {
+            System.out.println("ID PROFISSIONAL: " + usuario.getId_usuario());
+            System.out.println("NOME: " + usuario.getNome());
+            System.out.println("ROLE: " + usuario.getRole());
+        } else {
+            System.out.println("USUARIO: NULL");
+        }
+
+        System.out.println("=========================");
+        
         service.aceitarMatch(id_match, usuario);
+        
+        System.out.println("===== MATCH ACEITO =====");
+        System.out.println("ID MATCH: " + id_match);
+        System.out.println("========================");
+        
         return "Match aceito com sucesso!";
     }
     
