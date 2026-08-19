@@ -165,7 +165,7 @@ public class MatchService {
 
         if ("CLIENTE".equals(role) || "EMPREGADOR".equals(role)) {
 
-            return repository.listarMatchesAceitosSolicitante(id_usuario);
+            return repository.listarMatchesAceitos(id_usuario);
 
         }
 

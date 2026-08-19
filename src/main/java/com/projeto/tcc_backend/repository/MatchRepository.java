@@ -208,7 +208,7 @@ public class MatchRepository {
                     + "INNER JOIN usuario u "
                     + "ON p.id_usuario = u.id_usuario "
                     + "WHERE m.id_usuario = ? "
-                    + "AND m.status IN ('PENDENTE', 'ACEITO')"
+                    + "AND m.status IN ('PENDENTE','ACEITO')"
             );
 
             stmt.setInt(1, id_usuario);
